@@ -1,3 +1,5 @@
+/* Existing CSS code */
+
 .App {
   text-align: center;
 }
@@ -36,3 +38,20 @@
     transform: rotate(360deg);
   }
 }
+
+/* Add the following CSS for Room component */
+
+/* Room Component Styles */
+.room-page {
+  overflow: hidden; /* Prevent overall page scrolling */
+  height: 100vh; /* Full viewport height */
+}
+
+.chat-container {
+  height: calc(100vh - 100px); /* Dynamic height adjustment for chat container */
+  overflow-y: auto; /* Enable vertical scrolling for overflowing content */
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  padding: 10px; /* Padding for better appearance */
+}
+
+
