@@ -87,14 +87,20 @@ const Home = () => {
               Your room code:
             </Typography>
             <Box display="flex" alignItems="center" mb={2}>
-              <Typography variant="h6" sx={{ mr: 2 }}>
-                {generatedRoomCode}
-              </Typography>
+              <TextField
+                variant="outlined"
+                size="small"
+                value={generatedRoomCode}
+                InputProps={{
+                  readOnly: true, // Make the TextField read-only
+                }}
+                sx={{ mr: 2, flex: 1 }} // Flex to fill available space
+              />
               <IconButton onClick={copyToClipboard} sx={{ color: '#003366' }}>
                 <CopyAllIcon />
               </IconButton>
             </Box>
-            <TextField
+            {/* <TextField
               variant="outlined"
               size="small"
               placeholder="Enter the room code"
@@ -103,7 +109,8 @@ const Home = () => {
               required
               fullWidth
               margin="normal"
-            />
+              disabled // Disable the TextField
+            /> */}
             <Button
               type="submit"
               variant="contained"
