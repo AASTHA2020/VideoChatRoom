@@ -8,6 +8,7 @@ const Home = () => {
   const [roomCode, setRoomCode] = useState('');
   const [generatedRoomCode, setGeneratedRoomCode] = useState('');
   const [showEnterRoom, setShowEnterRoom] = useState(false);
+  const [showJoinRoom, setShowJoinRoom] = useState(false);
 
   // Function to generate a unique room ID
   const generateRoomCode = () => {
@@ -21,6 +22,12 @@ const Home = () => {
   const copyToClipboard = () => {
     navigator.clipboard.writeText(generatedRoomCode);
     alert('Room code copied to clipboard!'); // Optional: Provide feedback to the user
+  };
+
+  // Function to handle the "Join Room" button click
+  const handleJoinRoom = () => {
+    setShowJoinRoom(true);
+    setShowEnterRoom(false); // Hide the "Enter the Room" form
   };
 
   const handleSubmit = (e) => {
@@ -58,7 +65,7 @@ const Home = () => {
           },
         }}
       >
-        {!showEnterRoom ? (
+        {!showEnterRoom && !showJoinRoom ? (
           <>
             <Typography variant="h5" gutterBottom>
               Get your room ID:
@@ -80,8 +87,24 @@ const Home = () => {
             >
               Get My Room ID
             </Button>
+            <Button
+              type="button"
+              onClick={handleJoinRoom}
+              variant="contained"
+              sx={{
+                backgroundColor: '#003366', // Dark blue background color for the button
+                color: 'white', // White text color
+                '&:hover': {
+                  backgroundColor: '#004080', // Brighter blue on hover
+                },
+                mb: 2, // Margin bottom for spacing
+                width: '100%', // Full width button
+              }}
+            >
+              Join Room
+            </Button>
           </>
-        ) : (
+        ) : showEnterRoom ? (
           <>
             <Typography variant="h5" gutterBottom>
               Your room code:
@@ -100,17 +123,6 @@ const Home = () => {
                 <CopyAllIcon />
               </IconButton>
             </Box>
-            {/* <TextField
-              variant="outlined"
-              size="small"
-              placeholder="Enter the room code"
-              value={roomCode}
-              onChange={(e) => setRoomCode(e.target.value)}
-              required
-              fullWidth
-              margin="normal"
-              disabled // Disable the TextField
-            /> */}
             <Button
               type="submit"
               variant="contained"
@@ -125,6 +137,37 @@ const Home = () => {
               disabled={!roomCode} // Disable submit button if no room code
             >
               Enter the Room
+            </Button>
+          </>
+        ) : (
+          <>
+            <Typography variant="h5" gutterBottom>
+              Enter the room code to join:
+            </Typography>
+            <TextField
+              variant="outlined"
+              size="small"
+              placeholder="Enter the room code"
+              value={roomCode}
+              onChange={(e) => setRoomCode(e.target.value)}
+              required
+              fullWidth
+              margin="normal"
+            />
+            <Button
+              type="submit"
+              variant="contained"
+              sx={{
+                backgroundColor: '#003366', // Dark blue background color for the button
+                color: 'white', // White text color
+                '&:hover': {
+                  backgroundColor: '#004080', // Brighter blue on hover
+                },
+                width: '100%', // Full width button
+              }}
+              disabled={!roomCode} // Disable submit button if no room code
+            >
+              Join Room
             </Button>
           </>
         )}
